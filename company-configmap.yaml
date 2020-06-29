@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: company-descriptor
+data:
+  name: Minsky
+  version: 0.1.0
+  launchYear: "2020"
