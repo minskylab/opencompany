@@ -1,6 +1,5 @@
 resources:
   - service-account.yaml
-  - cluster-rol.yaml
+  - cluster-role.yaml
   - binding.yaml
   - traefik.yaml
-  - traefik-ingress.yaml
