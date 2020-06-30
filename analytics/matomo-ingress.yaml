@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: matomo
+  namespace: matomo
+  annotations:
+    kubernetes.io/ingress.class: traefik
+#    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+#  tls:
+#    - hosts:
+#        - analytics.minsky.cc
+#      secretName: analytics.minsky.cc-cert
+  rules:
+    - host: analytics.minsky.cc
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: matomo
+              servicePort: web
+
+---
+
+#apiVersion: cert-manager.io/v1alpha2
+#kind: Certificate
+#metadata:
+#  name: analytics.minsky.cc-cert
+#  namespace: matomo
+#spec:
+#  commonName: analytics.minsky.cc
+#  secretName: analytics.minsky.cc-cert
+#  issuerRef:
+#    name: letsencrypt

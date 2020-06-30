@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: matomo
+  namespace: matomo
+  labels:
+    app: matomo
+spec:
+  ports:
+    - port: 80
+      name: web
+      protocol: TCP
+  selector:
+    app: matomo
+    tier: dashboard
+  type: ClusterIP
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: matomo-pv-claim
+  namespace: matomo
+  labels:
+    app: matomo
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matomo
+  namespace: matomo
+  labels:
+    app: matomo
+spec:
+  selector:
+    matchLabels:
+      app: matomo
+      tier: dashboard
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      namespace: matomo
+      labels:
+        app: matomo
+        tier: dashboard
+    spec:
+      containers:
+        - name: matomo
+          image: matomo
+          env:
+            - name: MATOMO_DATABASE_HOST
+              value: matomo-mysql
+            - name: MATOMO_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-pass
+                  key: password
+          ports:
+            - containerPort: 80
+              name: matomo
+          volumeMounts:
+            - name: matomo-persistent-storage
+              mountPath: /var/www/html
+      volumes:
+        - name: matomo-persistent-storage
+          persistentVolumeClaim:
+            claimName: matomo-pv-claim

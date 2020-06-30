@@ -1,0 +1,9 @@
+secretGenerator:
+  - name: mysql-pass
+    namespace: matomo
+    literals:
+      - password="<YOUR_PASSWORD_HERE>"
+resources:
+  - mysql-deployment.yaml
+  - matomo-deployment.yaml
+  - matomo-ingress.yaml
