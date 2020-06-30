@@ -1,7 +1,6 @@
-secretGenerator:
-  - name: mysql-pass
-    envs:
-      - .configs.env
 resources:
-  - matomo-deployment.yaml
-  - mysql-deployment.yaml
+  - service-account.yaml
+  - cluster-rol.yaml
+  - binding.yaml
+  - traefik.yaml
+  - traefik-ingress.yaml
