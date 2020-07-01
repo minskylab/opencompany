@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minimal-web
+  labels:
+    app: minimal-web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: minimal-web
+      labels:
+        app: minimal-web
+    spec:
+      containers:
+        - name: minimal-web
+          image: minskylab/webbase
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: minimal-web
