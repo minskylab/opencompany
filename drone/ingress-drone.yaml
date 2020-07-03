@@ -1,21 +1,20 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: minimal-web
-  namespace: minimal
+  name: drone-server
   annotations:
     kubernetes.io/ingress.class: traefik
     cert-manager.io/cluster-issuer: buypass
 spec:
   tls:
     - hosts:
-        - minimal.minsky.cc
-      secretName: minimal.minsky.cc-cert
+        - drone.minsky.cc
+      secretName: drone.minsky.cc-cert
   rules:
-    - host: minimal.minsky.cc
+    - host: drone.minsky.cc
       http:
         paths:
           - path: /
             backend:
-              serviceName: minimal-web
+              serviceName: drone-server
               servicePort: web

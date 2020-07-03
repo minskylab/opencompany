@@ -4,27 +4,42 @@ metadata:
   name: letsencrypt
 spec:
   acme:
-    email: "<YOUR-EMAIL-HERE>"
+    email: "hello@minsky.cc"
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: example-issuer-account-key
+      name: issuer-account-key
     solvers:
       - http01:
           ingress:
             class: traefik
 
 ---
-
 apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
 spec:
   acme:
-    email: "<YOUR-EMAIL-HERE>"
+    email: "hello@minsky.cc"
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: example-issuer-account-key
+      name: issuer-account-key-staging
+    solvers:
+      - http01:
+          ingress:
+            class: traefik
+
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: buypass
+spec:
+  acme:
+    email: "hello@minsky.cc"
+    server: https://api.buypass.com/acme/directory
+    privateKeySecretRef:
+      name: issuer-account-key-staging
     solvers:
       - http01:
           ingress:

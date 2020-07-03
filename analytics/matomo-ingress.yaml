@@ -5,7 +5,7 @@ metadata:
   namespace: matomo
   annotations:
     kubernetes.io/ingress.class: traefik
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: buypass
 spec:
   tls:
     - hosts:
@@ -19,16 +19,3 @@ spec:
             backend:
               serviceName: matomo
               servicePort: web
-
----
-
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: analytics.minsky.cc-cert
-  namespace: matomo
-spec:
-  commonName: analytics.minsky.cc
-  secretName: analytics.minsky.cc-cert
-  issuerRef:
-    name: letsencrypt-staging

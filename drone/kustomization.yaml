@@ -1,0 +1,8 @@
+namespace: drone
+secretGenerator:
+  - name: drone-github
+    env: github.secrets.env
+resources:
+  - cluster-roles.yaml
+  - drone-server.yaml
+  - ingress-drone.yaml

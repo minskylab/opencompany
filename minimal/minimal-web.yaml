@@ -1,11 +1,30 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: minimal-web
+  namespace: minimal
+spec:
+  selector:
+    app: minimal-web
+  type: ClusterIP
+  ports:
+    - name: web
+      port: 80
+      targetPort: 3000
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: minimal-web
+  namespace: minimal
   labels:
     app: minimal-web
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: minimal-web
   template:
     metadata:
       name: minimal-web
@@ -17,6 +36,3 @@ spec:
           image: minskylab/webbase
           imagePullPolicy: IfNotPresent
       restartPolicy: Always
-  selector:
-    matchLabels:
-      app: minimal-web
