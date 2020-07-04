@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drone-runner
+  labels:
+    app: drone-runner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: drone-runner
+  template:
+    metadata:
+      labels:
+        name: drone-runner
+    spec:
+      containers:
+        - name: drone-runner
+          imagePullPolicy: IfNotPresent
+          image: drone/drone-runner-kube:1.0.0-beta.1
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DRONE_RPC_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: drone-runner-secrets
+                  key: DRONE_RPC_HOST
+            - name: DRONE_RPC_PROTO
+              valueFrom:
+                secretKeyRef:
+                  name: drone-runner-secrets
+                  key: DRONE_RPC_PROTO
+            - name: DRONE_RPC_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: drone-runner-secrets
+                  key: DRONE_RPC_SECRET
+            - name: DRONE_NAMESPACE_DEFAULT
+              valueFrom:
+                secretKeyRef:
+                  name: drone-runner-secrets
+                  key: DRONE_NAMESPACE_DEFAULT

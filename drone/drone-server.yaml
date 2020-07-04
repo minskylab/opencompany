@@ -73,6 +73,11 @@ spec:
                 secretKeyRef:
                   name: drone-github
                   key: DRONE_SERVER_HOST
+            - name: DRONE_SERVER_PROTO
+              valueFrom:
+                secretKeyRef:
+                  name: drone-github
+                  key: DRONE_SERVER_PROTO
             - name: DRONE_SERVER_PORT
               valueFrom:
                 secretKeyRef:

@@ -15,4 +15,4 @@
 # vendor/
 .idea/
 *.env
-github.secrets.env
+values.yaml

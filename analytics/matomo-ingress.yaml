@@ -2,7 +2,6 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: matomo
-  namespace: matomo
   annotations:
     kubernetes.io/ingress.class: traefik
     cert-manager.io/cluster-issuer: buypass

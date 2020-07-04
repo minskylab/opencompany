@@ -17,4 +17,4 @@ spec:
           - path: /
             backend:
               serviceName: drone-server
-              servicePort: web
+              servicePort: 80

@@ -2,7 +2,10 @@ namespace: drone
 secretGenerator:
   - name: drone-github
     env: github.secrets.env
+  - name: drone-runner-secrets
+    env: drone.secrets.env
 resources:
   - cluster-roles.yaml
   - drone-server.yaml
   - ingress-drone.yaml
+  - drone-runner.yaml
