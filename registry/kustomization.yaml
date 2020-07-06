@@ -1,0 +1,11 @@
+namespace: registry
+
+secretGenerator:
+  - name: storage-config
+    env: storage.secrets.env
+  - name: basic-auth
+    files:
+      - auth
+resources:
+  - docker-registry.yaml
+  - ingress-docker-registry.yaml

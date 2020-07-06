@@ -1,0 +1,1 @@
+htpasswd -Bbn admin "$YOUR_PASSWORD" > auth

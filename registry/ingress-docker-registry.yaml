@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: docker-registry
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: buypass
+spec:
+  tls:
+    - hosts:
+        - docker.minsky.cc
+      secretName: docker.minsky.cc-cert
+  rules:
+    - host: docker.minsky.cc
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: docker-registry
+              servicePort: web

@@ -16,3 +16,6 @@
 .idea/
 *.env
 values.yaml
+auth
+config.yaml
+config.yml
